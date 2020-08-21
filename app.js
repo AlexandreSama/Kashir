@@ -3,8 +3,6 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const mysql = require('mysql');
 const fs = require('fs');
-const mcping = require('mcping-js');
-const { time } = require('console');
 const prefix = '!';
 
 fs.readdir('./Command/', (error, f) => {
@@ -38,6 +36,16 @@ const reponsebarman = [
 let idmessage = [];
 
 client.on('message', message => {
+
+    let messageArray = message.content.split(/\s+/g);
+    let command = messageArray[0]
+    let args = messageArray.slice(1)
+    // console.log(args)
+
+    if (!command.startsWith(prefix)) return;
+
+    let cmd = client.commands.get(command.slice(prefix.length))
+    if (cmd) cmd.run(client, message, args);
     
     const messageaverifier = message.content.split(" ");
     const verification = messageaverifier.indexOf(";");
