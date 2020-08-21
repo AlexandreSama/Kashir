@@ -3,7 +3,7 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message, args) => {
 
-    const commandName = "!cquest "
+    const commandName = "!cquest ";
 
     let messageArray = message.content.substring(commandName.length).split(" | ");
     console.log(messageArray);
@@ -13,7 +13,8 @@ module.exports.run = (client, message, args) => {
         user : 'root',
         password: '',
         database: 'Kashir'
-    })
+    });
+
     connection.connect(console.log("Connexion Réussi"));
 
     connection.query(`INSERT INTO quests (nom, description, recompense) VALUES ("${messageArray[0]}","${messageArray[1]}","${messageArray[2]}")`, function(error, results, fields) {
@@ -25,7 +26,10 @@ module.exports.run = (client, message, args) => {
             message.channel.send("Quète Enregistré !")
             return;
         }
-    })
+    });
+
+    connection.end();
+
 }
 
 module.exports.help = {

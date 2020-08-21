@@ -8,7 +8,8 @@ module.exports.run = (client, message, args) => {
         user : 'root',
         password: '',
         database: 'Kashir'
-    })
+    });
+
     connection.connect(console.log("Connexion Réussi"));
 
     connection.query("select * FROM quests", function(error, results, fields){
@@ -23,7 +24,9 @@ module.exports.run = (client, message, args) => {
             })
             console.log(finalData)
         }
-    })
+    });
+
+    connection.end();
 
 }
 
