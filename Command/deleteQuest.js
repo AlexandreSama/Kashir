@@ -3,29 +3,39 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message, args) => {
 
+    // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!deletequest ";
 
+    //On récupère le message et on découpe le commandName
     let messages = message.content.substring(commandName.length);
+    //On transforme en nombre le String
     let number = Number(messages)
-    console.log(number);
 
+    //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: 'localhost',
         user : 'root',
         password: '',
         database: 'Kashir'
     });
+
+    //Connexion a la BDD
     connection.connect(console.log("Connexion Réussi"));
 
+    //Requête SQL envoyé avec récupération des erreurs, du resultat
     connection.query(`DELETE FROM quests WHERE id = ${number}`, function(error, results) {
+        //Si erreurs
         if (error){
-            console.log(error)
+            //On envoie un message d'erreur
             message.channel.send("Erreur, vérifier l'id que vous avez indiqué")
+        //Si résultats
         }if(results){
+            //On envoie un message de succés
             message.channel.send("Quête supprimé !")
         }
     });
 
+    //Fermeture de connexion
     connection.end();
 }
 
