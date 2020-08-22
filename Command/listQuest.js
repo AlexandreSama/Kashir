@@ -26,6 +26,7 @@ module.exports.run = (client, message, args) => {
             //On rend sous forme de JSON la var data
             var finalData = JSON.parse(data)
             //Pour chaque donnée du JSON, on envoie un message contenant la(les) quêtes disponibles
+            console.log(finalData)
             finalData.forEach(function(data, index) {
                 message.channel.send(`- id : ${data.id} \n - nom : ${data.nom} \n - description : ${data.description} \n - récompense : ${data.recompense}` )
             })

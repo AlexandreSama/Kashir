@@ -17,19 +17,20 @@ module.exports.run = (client, message, args) => {
     //Connexion a la BDD
     connection.connect(console.log("Connexion Réussi"));
 
-    var checkAccount = connection.query(`SELECT * FROM bank WHERE idaccount = ${iduser}`);
-    var createAccount = connection.query(`INSERT INTO bank (idaccount, money) VALUES ("${iduser}", "0")`)
-    console.log(checkAccount);
-
-    if (checkAccount === 0) {
-        createAccount();
-        message.channel.send("Compté crée avec succés !")
-    }else if (checkAccount > 0) {
-        message.channel.send("Désolé, tu a déjà un compte ouvert a cet ID!")
-    }
-
-    //Fermeture de connexion
-    connection.end();
+    connection.query(`SELECT * FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
+        if(error){
+            console.log(error)
+        }
+        if (result) {
+            console.log(result)
+        }if (result.length > 0) {
+                connection.end();
+                message.channel.send("Erreur, vous avez déjà un compte a votre nom !")
+        }if (result.length === 0) {
+                connection.query(`INSERT INTO bank (idaccount, money) VALUES ("${iduser}", "0")`)
+                message.channel.send("Compte crée avec succés")
+        }
+    }) 
 }
 
 
