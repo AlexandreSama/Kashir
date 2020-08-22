@@ -3,6 +3,8 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message, args) => {
 
+    message.delete();
+
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!deletequest ";
 

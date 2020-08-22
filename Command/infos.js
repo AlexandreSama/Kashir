@@ -3,6 +3,7 @@ const moment = require('moment');
 
 module.exports.run = (client, message, args) => {
 
+    message.delete();
     //On récupère l'info si on ping quelqu'un ou non
     const membre = message.mentions.members.first() || message.member;
     //On récupère les roles de la personne

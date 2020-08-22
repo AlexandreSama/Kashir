@@ -3,6 +3,8 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message, args) => {
 
+    message.delete();
+
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;
 

@@ -3,6 +3,8 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message, args) => {
 
+    message.delete();
+
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: 'localhost',
