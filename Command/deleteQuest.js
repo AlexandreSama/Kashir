@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const mysql = require('mysql');
+const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
 
@@ -15,10 +16,10 @@ module.exports.run = (client, message, args) => {
 
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user : 'root',
-        password: '',
-        database: 'Kashir'
+        host: config.ip,
+        user : config.user,
+        password: config.password,
+        database: config.database,
     });
 
     //Connexion a la BDD
@@ -29,6 +30,7 @@ module.exports.run = (client, message, args) => {
         //Si erreurs
         if (error){
             //On envoie un message d'erreur
+            console.log(error)
             message.channel.send("Erreur, vérifier l'id que vous avez indiqué")
         //Si résultats
         }if(results){

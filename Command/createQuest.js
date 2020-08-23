@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const mysql = require('mysql');
+const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
     
@@ -13,10 +14,10 @@ module.exports.run = (client, message, args) => {
 
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user : 'root',
-        password: '',
-        database: 'Kashir'
+        host: config.ip,
+        user : config.user,
+        password: config.password,
+        database: config.database,
     });
 
     //Connexion a la BDD
@@ -26,6 +27,7 @@ module.exports.run = (client, message, args) => {
     connection.query(`INSERT INTO quests (nom, description, recompense) VALUES ("${messageArray[0]}","${messageArray[1]}","${messageArray[2]}")`, function(error, results) {
         //Si erreurs
         if (error) {
+            console.log(error)
             //Envoi d'un message d'erreur
             message.channel.send("Erreur, vérifier bien votre message !")
             return;
