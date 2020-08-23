@@ -1,4 +1,4 @@
-https://img.shields.io/github/license/AlexandreSama/Kashir?style=for-the-badge
+[![GitHub license](https://img.shields.io/github/license/AlexandreSama/Kashir?style=for-the-badge)](https://github.com/AlexandreSama/Kashir)
 
 # Kashir
 
