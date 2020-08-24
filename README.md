@@ -1,4 +1,4 @@
-# Kashir
+<img src="https://zupimages.net/up/20/35/82h3.jpg">
 
 Kashir is a Discord.JS Bot for roleplay server. He creates a viable economy (backups will be done under MySQL) and independently manages the NPCs.
 
