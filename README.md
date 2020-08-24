@@ -1,23 +1,22 @@
 # Kashir
 
-EN : Kashir is a Discord.JS Bot for roleplay server. He creates a viable economy (backups will be done under MySQL) and independently manages the NPCs.
+Kashir is a Discord.JS Bot for roleplay server. He creates a viable economy (backups will be done under MySQL) and independently manages the NPCs.
 
 ## Require
 
-EN : 
 - Database
 - A RolePlay Server
 - something to keep the bot running continuously (VPS, Raspberry, etc..)
 
 ## Installation
 
-EN : Download everything except node_modules and do this command :
+Download everything except node_modules and do this command :
 
 ```bash
 npm install
 ```
 
-EN : change your Token in app.js, invite the bot to your server and run it !
+change your Token in app.js, invite the bot to your server and run it !
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
