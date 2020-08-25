@@ -10,7 +10,7 @@ Kashir is a Discord.JS Bot for roleplay server. He creates a viable economy (bac
 
 ## Installation
 
-Download everything except node_modules and do this command :
+Download or Clone this repository (``git clone https://github.com/AlexandreSama/Kashir.git``) and do the following :
 
 ```bash
 npm install
