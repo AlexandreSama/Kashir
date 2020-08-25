@@ -40,7 +40,6 @@ client.on('message', message => {
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0]
     let args = messageArray.slice(1)
-    // console.log(args)
 
     if (!command.startsWith(prefix)) return;
 
@@ -56,31 +55,28 @@ client.on('message', message => {
         return;
     }
     
-    if (verification >= 0) {
+    // if (verification >= 0) {
     
-        if (checkid < 0) {
-            idmessage.unshift(id);
-            idmessage.push('0');
-            message.channel.send(reponsebarman[0])
-            // console.log("premier message")
-        }
-        if (checkid >= 0 & idmessage.indexOf("0") >= 1 ){
-            idmessage.pop();
-            console.log(idmessage)
-            idmessage.push("1")
-            console.log(idmessage)
-            message.channel.send(reponsebarman[1])
-            // console.log("Deuxième Message")
-        }
-        if (checkid >= 0 & idmessage.indexOf("1") >= 1){
-            message.channel.send(reponsebarman[2])
-            // console.log("Troisième Message")
-        }
+    //     if (checkid < 0) {
+    //         idmessage.unshift(id);
+    //         idmessage.push('0');
+    //         message.channel.send(reponsebarman[0])
+    //     }
+    //     if (checkid >= 0 & idmessage.indexOf("0") >= 1 ){
+    //         idmessage.pop();
+    //         console.log(idmessage)
+    //         idmessage.push("1")
+    //         console.log(idmessage)
+    //         message.channel.send(reponsebarman[1])
+    //     }
+    //     if (checkid >= 0 & idmessage.indexOf("1") >= 1){
+    //         message.channel.send(reponsebarman[2])
+    //     }
     
-    }
-    if(message.content === `${prefix}id`){
-        message.channel.send(idmessage)
-    }
+    // }
+    // if(message.content === `${prefix}id`){
+    //     message.channel.send(idmessage)
+    // }
 });
 
 client.on('guildMemberAdd', member => {
