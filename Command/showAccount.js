@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
-
+    //Suppression du message de l'utilisateur
     message.delete();
 
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
@@ -20,11 +20,15 @@ module.exports.run = (client, message, args) => {
     //Connexion a la BDD
     connection.connect(console.log("Connexion Réussi"));
 
+    //Requête SQL envoyé avec récupération des erreurs, du resultat
     connection.query(`SELECT money FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
+        //Si erreur
         if (error) {
             console.log(error)
             message.channel.send("Désolé, vous n'avez pas de compte a votre actif !")
-        }if (result) {
+        }
+        //Si résultat
+        if (result) {
             console.log(result)
             //On rend sous forme de String le résultat
             var data = JSON.stringify(result)
@@ -33,7 +37,6 @@ module.exports.run = (client, message, args) => {
             message.channel.send(`Vous avez actuellement : ${finalData[0].money} pièces !`)
         }
     })
-
 }
 
 module.exports.help = {

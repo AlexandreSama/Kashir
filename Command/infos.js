@@ -2,21 +2,28 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = (client, message, args) => {
-
+    //Suppression du message de l'utilisateur
     message.delete();
+
     //On récupère l'info si on ping quelqu'un ou non
     const membre = message.mentions.members.first() || message.member;
+
     //On récupère les roles de la personne
     const roles = membre.roles.cache.map(r => `${r}`).join(' | ');
+
     //On récupère son derner message
     const lastMessage = membre.user.lastMessage;
     const lastMessagesChannel = membre.user.lastMessageChannelID;
+
     //On récupère le pseudo de la personne visée
     const pseudo = membre.user.username;
+
     //On récupère ensuite son activité(s'il en a une !)
     const activity = membre.user.presence.activities;
+
     //Puis on récupère les détails de l'activité
     const details = activity[0]['details'];
+
     //On récupère sa PDP (pour que ca fasse beau mdr)
     const pdp = membre.user.avatarURL();
 
@@ -40,11 +47,16 @@ module.exports.run = (client, message, args) => {
         var status = 'Déconnecté'
     }
 
+    //Ici, on vérifie si le bot a trouvé le dernier message de l'utilisateur
     if(lastMessage == null){
         var lastMessages = "Impossible de retrouver le dernier message";
-    }else if(lastMessagesChannel == null){
+    }
+    //Iic, on vérifie si le bot a trouvé dans quel channel se trouve le dernier message
+    else if(lastMessagesChannel == null){
         var lastMessagesChannels = "Impossible de retrouver le channel ou se trouve le dernier message";
-    }else{
+    }
+    //Ici, si le bot a tout trouvé, on remplace les vars par ceux que l'on désire
+    else{
         var lastMessages = lastMessage.content;
         var lastMessagesChannels = client.channels.cache.get(lastMessagesChannel);
     }
@@ -117,7 +129,6 @@ module.exports.run = (client, message, args) => {
 
     //Et ici, on arrive a la fin, on envois le message (donc le tableau)
     message.channel.send(embed);
-    //console.log(roles);
 
 }
 

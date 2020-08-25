@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 
 module.exports.run = (client, message, args) => {
-
+    //Suppression du message de l'utilisateur
     message.delete();
+    //Création d'un embed dans une constant (car il ne change jamais)
     const embed = new Discord.MessageEmbed()
     .setColor("#5361ad")
     .setTitle('Panneau des commandes')
@@ -20,6 +21,7 @@ module.exports.run = (client, message, args) => {
 	.setTimestamp()
     .setFooter('Made With Love By Alexandre', 'https://i.imgur.com/wSTFkRM.png');
     
+    //Envoi de l'embed dans le channel
     message.channel.send(embed);
 
 }

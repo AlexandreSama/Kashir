@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
-
+    //Suppression du message de l'utilisateur
     message.delete();
 
     //Variable de connexion a la BDD
