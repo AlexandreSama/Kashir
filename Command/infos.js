@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const moment = require('moment');
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (client, message) => {
     //Suppression du message de l'utilisateur
     message.delete();
 

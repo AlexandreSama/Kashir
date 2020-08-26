@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (message) => {
     //Suppression du message de l'utilisateur
     message.delete();
     //Création d'un embed dans une constant (car il ne change jamais)
@@ -26,7 +26,7 @@ module.exports.run = (client, message, args) => {
     .setFooter('Made With Love By Alexandre', 'https://i.imgur.com/wSTFkRM.png');
     
     //Envoi de l'embed dans le channel
-    message.channel.send(embed);
+    message.author.send(embed);
 
 }
 

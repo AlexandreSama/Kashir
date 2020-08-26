@@ -1,10 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-const mysql = require('mysql');
-const io = require('@pm2/io')
 const fs = require('fs');
-const prefix = '!';
+const prefix = "!";
 
 fs.readdir('./Command/', (error, f) => {
     if (error) { return console.error(error); }
@@ -29,15 +27,7 @@ fs.readdir('./Events/', (error, f) => {
         });
 });
 
-const reponsebarman = [
-    "**Le barman s'avance jusqu'a la table avec un grand sourire avant de sortir son carnet et un stylo**\n puis-je prendre votre commande ?",
-    "**Le charmant Barman nota la commande avec un grand sourire**\n\n bien, je reviens d'ici quelques minutes\n **Le Barman parti vers le comptoir, préparant en sifflotant la commande**",
-    "**Le Barman revint avec la commande, un sourire chaleureux aux lèvres**\n\n et voila, bonne soirée \n\n **Il reparti au comptoir s'occuper des autres commandes**"
-];
-let idmessage = [];
-
 client.on('message', message => {
-
 
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0]
@@ -48,11 +38,8 @@ client.on('message', message => {
     let cmd = client.commands.get(command.slice(prefix.length))
     if (cmd) cmd.run(client, message, args);
     
-    const messageaverifier = message.content.split(" ");
     
-    if (message.author.bot) {
-        return;
-    }
+    if (message.author.bot) {return;}
 });
 
 client.on('guildMemberAdd', member => {
