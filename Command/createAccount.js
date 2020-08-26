@@ -6,6 +6,8 @@ module.exports.run = (client, message, args) => {
 
     message.delete();
 
+    const channel = client.channels.cache.get(748223617665466448);
+
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;
 
@@ -22,7 +24,7 @@ module.exports.run = (client, message, args) => {
 
     connection.query(`SELECT * FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
         if(error){
-            console.log(error)
+            channel.send('<content>');
         }
         if (result) {
             console.log(result)

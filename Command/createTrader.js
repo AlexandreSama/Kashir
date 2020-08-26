@@ -4,8 +4,13 @@ const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
 
+    //Suppression du message de l'utilisateur
+    message.delete();
+
      // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
      const commandName = "!createtrader ";
+
+     const channel = client.channels.cache.get(748223617665466448);
 
      let messageArray = message.content.substring(commandName.length).split(" | ");
  
@@ -23,7 +28,7 @@ module.exports.run = (client, message, args) => {
      connection.query(`CREATE TABLE ${messageArray[0]} (ID INT NOT NULL AUTO_INCREMENT , item TEXT NOT NULL, price INT NOT NULL, funds BIGINT NOT NULL, PRIMARY KEY (ID))`, function(error, result){
         if(error){
             connection.end();
-            console.log(error)
+            channel.send('<content>');
             message.channel.send("Erreur, un marchand est déjà crée avec ce nom, ou vérifier le nom que vous avez entrée")
         }
         if(result){

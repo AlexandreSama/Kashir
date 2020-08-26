@@ -9,6 +9,8 @@ module.exports.run = (client, message, args) => {
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;
 
+    const channel = client.channels.cache.get(748223617665466448);
+
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: config.ip,
@@ -24,7 +26,7 @@ module.exports.run = (client, message, args) => {
     connection.query(`SELECT money FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
         //Si erreur
         if (error) {
-            console.log(error)
+            channel.send('<content>');
             message.channel.send("Désolé, vous n'avez pas de compte a votre actif !")
         }
         //Si résultat

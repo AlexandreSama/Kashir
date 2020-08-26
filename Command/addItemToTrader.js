@@ -4,8 +4,13 @@ const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
 
+    //Suppression du message de l'utilisateur
+    message.delete();
+
      // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
      const commandName = "!additemtotrader ";
+
+     const channel = client.channels.cache.get(748223617665466448);
 
      let messageArray = message.content.substring(commandName.length).split(" | ");
  
@@ -22,7 +27,7 @@ module.exports.run = (client, message, args) => {
 
      connection.query(`INSERT INTO ${messageArray[0]} (item, price) VALUES ("${messageArray[1]}", "${messageArray[2]}")`, function(error, result) {
          if(error){
-             console.log(error)
+            channel.send('<content>');
              message.channel.send("Erreur, impossible de trouver ce marchant ou vérifier le nom et/ou le prix de l'item");
          }
          if(result){

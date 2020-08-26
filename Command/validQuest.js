@@ -10,6 +10,8 @@ module.exports.run = (client, message, args) => {
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!validquest ";
 
+    const channel = client.channels.cache.get(748223617665466448);
+
     // on retire le commandName du message et on découpe chaque String a chaque |
     let messageArray = message.content.substring(commandName.length).split(" ");
 
@@ -28,7 +30,7 @@ module.exports.run = (client, message, args) => {
     connection.query(`SELECT recompense FROM quests WHERE id = ${messageArray[0]}`, function(error, results) {
         //Si erreurs
         if(error){
-            console.log(error)
+            channel.send('<content>');
         }
         //Si Résultats
         if (results) {

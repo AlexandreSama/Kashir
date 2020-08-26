@@ -6,6 +6,8 @@ module.exports.run = (client, message, args) => {
     //Suppression du message de l'utilisateur
     message.delete();
 
+    const channel = client.channels.cache.get(748223617665466448);
+
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: config.ip,
@@ -21,7 +23,7 @@ module.exports.run = (client, message, args) => {
     connection.query("select * FROM quests", function(error, results){
         //Si erreurs
         if (error) {
-            console.log(error)
+            channel.send('<content>');
             message.channel.send("Erreur, aucune quête disponible")
         //Si résultats
         }if (results) {

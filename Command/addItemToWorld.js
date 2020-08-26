@@ -4,8 +4,13 @@ const config = require('../config.json');
 
 module.exports.run = (client, message, args) => {
 
+    //Suppression du message de l'utilisateur
+    message.delete();
+
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!additemtoworld ";
+
+    const channel = client.channels.cache.get(748223617665466448);
 
     let messageArray = message.content.substring(commandName.length).split(" | ");
 
@@ -22,7 +27,7 @@ module.exports.run = (client, message, args) => {
 
     connection.query(`INSERT INTO items (name, description) VALUES ("${messageArray[0]}", "${messageArray[1]}")`, function(error, result) {
         if(error){
-            console.log(error)
+            channel.send('<content>');
             message.channel.send("Erreur, veuillez vérifier le nom et/ou la description de l'item");
         }
         if(result){
