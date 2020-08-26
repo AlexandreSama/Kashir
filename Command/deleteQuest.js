@@ -33,7 +33,7 @@ module.exports.run = (client, message, args) => {
         //Si erreurs
         if (error){
             //On envoie un message d'erreur
-            channel.send('<content>');
+            channel.send(error);
             message.channel.send("Erreur, vérifier l'id que vous avez indiqué")
         //Si résultats
         }if(results){

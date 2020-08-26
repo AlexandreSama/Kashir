@@ -23,7 +23,7 @@ module.exports.run = (client, message, args) => {
     connection.query("select * FROM quests", function(error, results){
         //Si erreurs
         if (error) {
-            channel.send('<content>');
+            channel.send(error);
             message.channel.send("Erreur, aucune quête disponible")
         //Si résultats
         }if (results) {

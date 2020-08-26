@@ -24,7 +24,7 @@ module.exports.run = (client, message, args) => {
 
     connection.query(`SELECT * FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
         if(error){
-            channel.send('<content>');
+            channel.send(error);
         }
         if (result) {
             console.log(result)

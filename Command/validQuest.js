@@ -30,7 +30,7 @@ module.exports.run = (client, message, args) => {
     connection.query(`SELECT recompense FROM quests WHERE id = ${messageArray[0]}`, function(error, results) {
         //Si erreurs
         if(error){
-            channel.send('<content>');
+            channel.send(error);
         }
         //Si Résultats
         if (results) {

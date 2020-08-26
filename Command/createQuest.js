@@ -29,7 +29,7 @@ module.exports.run = (client, message, args) => {
     connection.query(`INSERT INTO quests (nom, description, recompense) VALUES ("${messageArray[0]}","${messageArray[1]}","${messageArray[2]}")`, function(error, results) {
         //Si erreurs
         if (error) {
-            channel.send('<content>');
+            channel.send(error);
             //Envoi d'un message d'erreur
             message.channel.send("Erreur, vérifier bien votre message !")
             return;
