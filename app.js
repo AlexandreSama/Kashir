@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const mysql = require('mysql');
+const io = require('@pm2/io')
 const fs = require('fs');
 const prefix = '!';
 
@@ -37,6 +38,7 @@ let idmessage = [];
 
 client.on('message', message => {
 
+
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0]
     let args = messageArray.slice(1)
@@ -47,36 +49,10 @@ client.on('message', message => {
     if (cmd) cmd.run(client, message, args);
     
     const messageaverifier = message.content.split(" ");
-    const verification = messageaverifier.indexOf(";");
-    const checkid = idmessage.indexOf(message.author.id);
-    const id = message.author.id;
     
     if (message.author.bot) {
         return;
     }
-    
-    // if (verification >= 0) {
-    
-    //     if (checkid < 0) {
-    //         idmessage.unshift(id);
-    //         idmessage.push('0');
-    //         message.channel.send(reponsebarman[0])
-    //     }
-    //     if (checkid >= 0 & idmessage.indexOf("0") >= 1 ){
-    //         idmessage.pop();
-    //         console.log(idmessage)
-    //         idmessage.push("1")
-    //         console.log(idmessage)
-    //         message.channel.send(reponsebarman[1])
-    //     }
-    //     if (checkid >= 0 & idmessage.indexOf("1") >= 1){
-    //         message.channel.send(reponsebarman[2])
-    //     }
-    
-    // }
-    // if(message.content === `${prefix}id`){
-    //     message.channel.send(idmessage)
-    // }
 });
 
 client.on('guildMemberAdd', member => {
