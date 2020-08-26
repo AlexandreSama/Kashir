@@ -16,7 +16,10 @@ module.exports.run = (client, message, args) => {
 		{ name: '!deletequest', value: 'Exemple : !deletequest iddelaquete'},
         { name: '!listquest', value: 'Donne la liste des quêtes disponibles'},
         { name: '!showaccount', value: 'Donne un apercu de la somme que vous avez sur vous ou dans votre banque'},
-        { name: '!createaccount', value: 'Vous crée un compte bancaire'})
+        { name: '!createaccount', value: 'Vous crée un compte bancaire'},
+        { name: '!additemtotrader', value: 'Ajoute un item dans votre boutique, Exemple: !additemtotrader votrenomdemarchand | nomdelitem | prixdelitem'},
+        { name: '!additemtoworld', value: 'Ajoute un item dans votre univers, exemple : !additemtoworld nomdelitem | descriptiondelitem'},
+        { name: '!createtrader', value: 'Inscriver vous en tant que marchand, exemple : !createtrader votrenom'})
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
     .setFooter('Made With Love By Alexandre', 'https://i.imgur.com/wSTFkRM.png');
