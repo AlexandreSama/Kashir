@@ -19,7 +19,8 @@ module.exports.run = (client, message, args) => {
         { name: '!createaccount', value: 'Vous crée un compte bancaire'},
         { name: '!additemtotrader', value: 'Ajoute un item dans votre boutique, Exemple: !additemtotrader votrenomdemarchand | nomdelitem | prixdelitem'},
         { name: '!additemtoworld', value: 'Ajoute un item dans votre univers, exemple : !additemtoworld nomdelitem | descriptiondelitem'},
-        { name: '!createtrader', value: 'Inscriver vous en tant que marchand, exemple : !createtrader votrenom'})
+        { name: '!createtrader', value: 'Inscriver vous en tant que marchand, exemple : !createtrader votrenom'},
+        { name: '!showtraders', value: 'Regarder la liste des marchands de votre univers, exemple : !showtraders'})
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
     .setFooter('Made With Love By Alexandre', 'https://i.imgur.com/wSTFkRM.png');
