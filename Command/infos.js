@@ -22,7 +22,7 @@ module.exports.run = (client, message) => {
     const activity = membre.user.presence.activities;
 
     //On récupère sa PDP (pour que ca fasse beau mdr)
-    const pdp = membre.user.avatarURL();
+    const pdp = membre.user.displayAvatarURL({dynamic : true});
 
     //Ici, on crée le panneau qui affichera les informations de la personne, 
     //Ce sera les paramètres prédéfini(qui ne bougerons plus)

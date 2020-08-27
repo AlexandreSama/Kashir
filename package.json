@@ -9,7 +9,8 @@
     "mcping-js": "^1.5.0",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "webp-converter": "^2.3.0"
   },
   "devDependencies": {},
   "scripts": {
