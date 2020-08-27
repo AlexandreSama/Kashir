@@ -21,9 +21,6 @@ module.exports.run = (client, message) => {
     //On récupère ensuite son activité(s'il en a une !)
     const activity = membre.user.presence.activities;
 
-    //Puis on récupère les détails de l'activité
-    const details = activity[0]['details'];
-
     //On récupère sa PDP (pour que ca fasse beau mdr)
     const pdp = membre.user.avatarURL();
 
@@ -111,7 +108,7 @@ module.exports.run = (client, message) => {
             },
             {
                 name: 'Jeu :',
-                value: `${activity}\n${details}`, inline: true
+                value: `${activity}`, inline: true
             },
             {
                 name: 'Status',
@@ -129,6 +126,8 @@ module.exports.run = (client, message) => {
 
     //Et ici, on arrive a la fin, on envois le message (donc le tableau)
     message.channel.send(embed);
+
+    console.log(embed)
 
 }
 
