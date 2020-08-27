@@ -29,7 +29,7 @@ module.exports.run = (client, message) => {
         if(error){
             connection.end();
             channel.send(error);
-            message.channel.send("Erreur, un marchand est déjà crée avec ce nom, ou vérifier le nom que vous avez entrée")
+            message.channel.send("Erreur, un marchand est déjà crée a ce nom, ou vérifier le nom que vous avez entrée")
         }
         if(result){
             connection.query(`INSERT INTO traders (name) VALUES ("${messageArray[0]}")`)

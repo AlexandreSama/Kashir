@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
-module.exports.run = (message) => {
+module.exports.run = (client, message) => {
+
     //Suppression du message de l'utilisateur
     message.delete();
+    
     //Création d'un embed dans une constant (car il ne change jamais)
     const embed = new Discord.MessageEmbed()
     .setColor("#5361ad")

@@ -24,7 +24,7 @@ module.exports.run = (client, message) => {
         //Si erreurs
         if (error) {
             channel.send(error);
-            message.channel.send("Erreur, aucune quête disponible")
+            message.channel.send("Il n'y a aucune quête pour aujourd'hui malheureusement")
         //Si résultats
         }if (results) {
             //On rend sous forme de String le résultat

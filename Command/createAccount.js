@@ -30,7 +30,7 @@ module.exports.run = (client, message) => {
             console.log(result)
         }if (result.length > 0) {
                 connection.end();
-                message.channel.send("Erreur, vous avez déjà un compte a votre nom !")
+                message.channel.send("Erreur, vous avez déjà un compte lié a votre compte Discord !")
         }if (result.length === 0) {
                 connection.query(`INSERT INTO bank (idaccount, money) VALUES ("${iduser}", "0")`)
                 message.channel.send("Compte crée avec succés")

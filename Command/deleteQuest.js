@@ -38,7 +38,7 @@ module.exports.run = (client, message) => {
         //Si résultats
         }if(results){
             //On envoie un message de succés
-            message.channel.send("Quête supprimé !")
+            message.channel.send("Quête supprimé avec succés !")
         }
     });
 

@@ -36,7 +36,7 @@ module.exports.run = (client, message) => {
             var data = JSON.stringify(result)
             //On rend sous forme de JSON la var data
             var finalData = JSON.parse(data)
-            message.channel.send(`Vous avez actuellement : ${finalData[0].money} pièces !`)
+            message.author.send(`Vous avez actuellement : ${finalData[0].money} pièces !`)
         }
     })
 }

@@ -32,7 +32,7 @@ module.exports.run = (client, message) => {
             //On rend sous forme de JSON la var data
             var finalData = JSON.parse(data)
             finalData.forEach(function(data, index) {
-                message.channel.send(`- nom : ${data.name}` )
+                message.author.send(`- nom : ${data.name}` )
             })
         }
     })

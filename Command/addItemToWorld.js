@@ -31,7 +31,7 @@ module.exports.run = (client, message) => {
             message.channel.send("Erreur, veuillez vérifier le nom et/ou la description de l'item");
         }
         if(result){
-            message.channel.send("Item enregistré !")
+            message.channel.send("Item enregistré avec succés !")
         }
     })
 

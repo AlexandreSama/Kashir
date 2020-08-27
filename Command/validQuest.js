@@ -45,11 +45,11 @@ module.exports.run = (client, message) => {
                 if(errors) {
                     console.log(errors);
                     connection.end();
-                    message.channel.send("Erreur, vérifier votre ID de quête ou l'id du joueur");
+                    message.author.send("Erreur, vérifier votre ID de quête ou l'id du joueur");
                 }
                 //Si Résultats
                 if(result){
-                    message.channel.send("Récompense transféré avec succés !")
+                    message.author.send("Récompense transféré avec succés !")
                 }
             })
         }
