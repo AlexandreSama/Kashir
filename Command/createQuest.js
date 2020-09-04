@@ -37,7 +37,7 @@ module.exports.run = (client, message) => {
         //Si Résultat
         if (results) {
             //Envoi d'un message de succés
-            message.channel.send("Quète Enregistré avec succés !")
+            message.channel.send("quête Enregistré avec succés !")
             return;
         }
     });

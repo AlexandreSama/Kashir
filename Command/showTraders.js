@@ -22,7 +22,7 @@ module.exports.run = (client, message) => {
 
     connection.query(`SELECT name FROM traders`, function(error, result) {
         if(error){
-            channel.send(error);
+            console.log(error);
             message.channel.send("Erreur, veuillez contacter votre Administrateur !")
         }
         if(result){

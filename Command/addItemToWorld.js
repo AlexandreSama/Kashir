@@ -27,7 +27,7 @@ module.exports.run = (client, message) => {
 
     connection.query(`INSERT INTO items (name, description) VALUES ("${messageArray[0]}", "${messageArray[1]}")`, function(error, result) {
         if(error){
-            channel.send(error);
+            console.log(error);
             message.channel.send("Erreur, veuillez vérifier le nom et/ou la description de l'item");
         }
         if(result){

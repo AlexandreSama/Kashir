@@ -15,7 +15,7 @@ module.exports.run = (client, message) => {
 	.addFields(
 		{ name: '!help', value: 'Donne l\'accés au panneau d\'information' },
 		{ name: '!cquest', value: 'Exemple : !cquest nom | description | recompense (en chiffre,sans espace n\'y texte)'},
-		{ name: '!deletequest', value: 'Exemple : !deletequest iddelaquete'},
+		{ name: '!deletequest', value: 'Exemple : !deletequest iddelaquête'},
         { name: '!listquest', value: 'Donne la liste des quêtes disponibles'},
         { name: '!showaccount', value: 'Donne un apercu de la somme que vous avez sur vous ou dans votre banque'},
         { name: '!createaccount', value: 'Vous crée un compte bancaire'},

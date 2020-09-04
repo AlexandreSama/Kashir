@@ -27,7 +27,7 @@ module.exports.run = (client, message) => {
 
      connection.query(`INSERT INTO ${messageArray[0]} (item, price) VALUES ("${messageArray[1]}", "${messageArray[2]}")`, function(error, result) {
          if(error){
-            channel.send(error);
+            console.log(error);
              message.channel.send("Erreur, impossible de trouver ce marchant ou vérifier le nom et/ou le prix de l'item");
          }
          if(result){

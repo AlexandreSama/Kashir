@@ -26,7 +26,7 @@ module.exports.run = (client, message) => {
     connection.query(`SELECT money FROM bank WHERE idaccount = ${iduser}`, function(error, result) {
         //Si erreur
         if (error) {
-            channel.send(error);
+            console.log(error);
             message.channel.send("Désolé, vous n'avez pas de compte a votre actif !")
         }
         //Si résultat

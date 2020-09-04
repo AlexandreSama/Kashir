@@ -28,7 +28,7 @@ module.exports.run = (client, message) => {
      connection.query(`CREATE TABLE ${messageArray[0]} (ID INT NOT NULL AUTO_INCREMENT , item TEXT NOT NULL, price INT NOT NULL, funds BIGINT NOT NULL, PRIMARY KEY (ID))`, function(error, result){
         if(error){
             connection.end();
-            channel.send(error);
+            console.log(error);
             message.channel.send("Erreur, un marchand est déjà crée a ce nom, ou vérifier le nom que vous avez entrée")
         }
         if(result){
