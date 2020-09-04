@@ -19,6 +19,6 @@ npm install
 change your Token in app.js, invite the bot to your server and run it !
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change thanks :D
 
 Please make sure to update tests as appropriate.
