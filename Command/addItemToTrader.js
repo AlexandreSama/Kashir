@@ -13,6 +13,8 @@ module.exports.run = (client, message) => {
      const channel = client.channels.cache.get(748223617665466448);
 
      let messageArray = message.content.substring(commandName.length).split(" | ");
+
+     let config = '../config.json'
  
      //Variable de connexion a la BDD
      var connection = mysql.createConnection({

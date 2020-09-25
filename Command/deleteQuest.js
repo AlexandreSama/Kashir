@@ -17,6 +17,8 @@ module.exports.run = (client, message) => {
     //On transforme en nombre le String
     let number = Number(messages)
 
+    let config = '../config.json'
+
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: config.ip,

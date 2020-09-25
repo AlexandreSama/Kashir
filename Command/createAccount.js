@@ -11,6 +11,8 @@ module.exports.run = (client, message) => {
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;
 
+    let config = '../config.json'
+
     //Variable de connexion a la BDD
     var connection = mysql.createConnection({
         host: config.ip,
