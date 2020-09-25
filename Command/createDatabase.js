@@ -41,6 +41,20 @@ module.exports.run = (client, message) => {
     //Connexion a la BDD
     connection.connect(console.log("Connexion Réussi"));
 
+    connection.query(`CREATE DATABASE ${messageArray[3]}; CREATE TABLE items (
+        id INT PRIMARY KEY NOT NULL,
+        name VARCHAR(100),
+        description TEXT
+    ); CREATE TABLE bank (
+        id INT PRIMARY KEY NOT NULL,
+        idaccount INT NOT NULL,
+        money INT
+    ); CREATE TABLE quests (
+        id INT PRIMARY KEY NOT NULL,
+        nom VARCHAR(200) NOT NULL,
+        description TEXT NOT NULL,
+        recompense TEXT NOT NULL
+    )`)
 }
 
 module.exports.help = {
