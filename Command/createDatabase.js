@@ -71,6 +71,7 @@ module.exports.run = (client, message) => {
                     connection.end();
                     message.channel.send('Erreur ! Veuillez contacter votre administrateur')
                 }if(result){
+                    console.log("yes !")
                     message.channel.send("Base de Donnée crée avec succés")
                 }
             })
