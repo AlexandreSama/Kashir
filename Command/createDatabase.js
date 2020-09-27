@@ -46,12 +46,12 @@ module.exports.run = (client, message) => {
         }
     })
 
-    connection.query(`CREATE DATABASE testkashir;`, function(error, result){
+    connection.query(`CREATE DATABASE ${messageArray[3]};`, function(error, result){
         if(error){
             connection.end();
             console.log(error);
         }if(result){
-            connection.query(`USE testkashir;`, function(error, result){
+            connection.query(`USE ${messageArray[3]};`, function(error, result){
         if(error){
             connection.end();
             console.log(error);
