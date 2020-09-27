@@ -39,22 +39,43 @@ module.exports.run = (client, message) => {
     }
 
     //Connexion a la BDD
-    connection.connect(console.log("Connexion Réussi"));
+    connection.connect(function(err, res) {
+        if (err) {
+          console.error('error connecting: ' + err.stack);
+          return;
+        }
+    })
 
-    connection.query(`CREATE DATABASE ${messageArray[3]}; CREATE TABLE items (
-        id INT PRIMARY KEY NOT NULL,
-        name VARCHAR(100),
-        description TEXT
-    ); CREATE TABLE bank (
-        id INT PRIMARY KEY NOT NULL,
-        idaccount INT NOT NULL,
-        money INT
-    ); CREATE TABLE quests (
-        id INT PRIMARY KEY NOT NULL,
-        nom VARCHAR(200) NOT NULL,
-        description TEXT NOT NULL,
-        recompense TEXT NOT NULL
-    )`)
+    connection.query(`CREATE DATABASE testkashir;`, function(error, result){
+        if(error){
+            connection.end();
+            console.log(error);
+        }if(result){
+            connection.query(`USE testkashir;`, function(error, result){
+        if(error){
+            connection.end();
+            console.log(error);
+        }if(result){
+            connection.query(`CREATE TABLE items (ID INT NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, description TEXT NOT NULL, PRIMARY KEY (ID));`, function(error, result){
+        if(error){
+            connection.end();
+            console.log(error);
+        }if(result){
+            connection.query(`CREATE TABLE bank (ID INT NOT NULL AUTO_INCREMENT, idaccount INT NOT NULL, money INT, PRIMARY KEY (ID));`, function(error, result){
+        if(error){
+            connection.end();
+            console.log(error);
+        }if(result){
+            connection.query(`CREATE TABLE quests (ID INT NOT NULL AUTO_INCREMENT, nom VARCHAR(200) NOT NULL, description TEXT NOT NULL, recompense TEXT NOT NULL, PRIMARY KEY (ID))`, function(error, result){
+                if(error){
+                    connection.end();
+                    message.channel.send('Erreur ! Veuillez contacter votre administrateur')
+                }if(result){
+                    message.channel.send("Base de Donnée crée avec succés")
+                }
+            })
+        }
+    })}})}})}})
 }
 
 module.exports.help = {
