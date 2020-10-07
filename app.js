@@ -2,7 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const fs = require('fs');
+const ready = require('./Events/ready');
 const prefix = "!";
+
+let infos = [];
 
 fs.readdir('./Command/', (error, f) => {
     if (error) { return console.error(error); }
@@ -14,6 +17,7 @@ fs.readdir('./Command/', (error, f) => {
             console.log(`${f} commande chargée !`);
             client.commands.set(commande.help.name, commande);
         });
+        infos.push(`${commandes.length}`)
 });
 
 fs.readdir('./Events/', (error, f) => {
@@ -23,9 +27,17 @@ fs.readdir('./Events/', (error, f) => {
         f.forEach((f) => {
             let events = require(`./Events/${f}`);
             let event = f.split('.')[0];
-            client.on(event, events.bind(null, client));
+            client.on(event, events.bind(null, client, fs));
         });
 });
+
+client.on('ready', ready=>{
+    infos.push(client.guilds.cache.size);
+    fs.writeFile('coucou.json', JSON.stringify(infos), (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+    });
+})
 
 client.on('message', message => {
 
@@ -45,7 +57,7 @@ client.on('message', message => {
 client.on('guildMemberAdd', member => {
 
     console.log(`L'utilisateur'` + member.user.tag + `a rejoins le serveur!`);
-    var role = member.guild.roles.cache.find(role => role.name === 'Joueurs');
+    var role = member.guild.roles.cache.find(role => role.name === 'Les copains');
     member.roles.add(role);
 
 })
