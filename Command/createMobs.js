@@ -16,19 +16,6 @@ module.exports.run = (client, message) => {
             download(msg.attachments.first().url);//Function I will show later
         }
     }
-
-    let config = '../config.json'
- 
-     //Variable de connexion a la BDD
-     var connection = mysql.createConnection({
-         host: config.ip,
-         user : config.user,
-         password: config.password,
-         database: config.database,
-     });
-
-     //Connexion a la BDD
-     connection.connect(console.log("Connexion Réussi"));
 }
 
 module.exports.help = {
