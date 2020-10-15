@@ -35,7 +35,7 @@ client.on('ready', ready=>{
     infos.push(client.guilds.cache.size);
     fs.writeFile('infos.json', JSON.stringify(infos), (err) => {
         if (err) throw err;
-        message.channel.send('Le fichier a été sauvegarder!');
+        console.log('Le fichier a été sauvegarder!');
     });
 })
 
