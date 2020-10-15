@@ -33,9 +33,9 @@ fs.readdir('./Events/', (error, f) => {
 
 client.on('ready', ready=>{
     infos.push(client.guilds.cache.size);
-    fs.writeFile('coucou.json', JSON.stringify(infos), (err) => {
+    fs.writeFile('infos.json', JSON.stringify(infos), (err) => {
         if (err) throw err;
-        console.log('The file has been saved!');
+        message.channel.send('Le fichier a été sauvegarder!');
     });
 })
 
