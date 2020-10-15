@@ -5,11 +5,17 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message) => {
 
-    var attachment = (message.attachments).array();
+    function download(url){
+        request.get(url)
+            .on('error', console.error)
+            .pipe(fs.createWriteStream('meme.png'));
+    }
 
-    request.get(attachment.url)
-    .on('error', console.error)
-    .pipe(fs.createWriteStream(`Img-${Date.now()}`));
+    if(message.attachments.first()){//checks if an attachment is sent
+        if(msg.attachments.first().filename === `png`){//Download only png (customize this)
+            download(msg.attachments.first().url);//Function I will show later
+        }
+    }
 
     let config = '../config.json'
  
