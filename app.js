@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const io = require('@pm2/io');
 client.commands = new Discord.Collection();
 const fs = require('fs');
 const ready = require('./Events/ready');
@@ -61,5 +62,18 @@ client.on('guildMemberAdd', member => {
     member.roles.add(role);
 
 })
+
+const latency = io.metric({
+    name: 'latency',
+    type: 'histogram',
+    measurement: 'mean'
+  });
+  
+  const latencyValue = 0;
+  
+  setInterval(() => {
+    latencyValue = Math.round(Math.random() * 100);
+    latency.set(latencyValue);
+  }, 100);
 
 client.login('');
