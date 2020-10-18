@@ -42,6 +42,10 @@ client.on('ready', ready=>{
 
 client.on('message', message => {
 
+    let test = message.mentions.members.first();
+    let test2 = test.joinedAt()
+    console.log(test2)
+
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0]
     let args = messageArray.slice(1)
@@ -68,7 +72,6 @@ const latency = io.metric({
     type: 'histogram',
     measurement: 'mean'
   });
-  
   const latencyValue = 0;
   
   setInterval(() => {
