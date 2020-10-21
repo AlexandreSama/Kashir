@@ -42,7 +42,7 @@ module.exports.run = async (client, message, args) => {
     ctx.fillText(user.tag, 300, 120);
 
     ctx.font = "50px Arial";
-    ctx.fillText("Niveau:", 300, 180);
+    ctx.fillText(`Niveau: ${data.level}`, 300, 180);
     ctx.fillText(`${data.level}`, 47, 180);
 
     ctx.arc(170, 160, 120, 0, Math.PI * 2, true);
