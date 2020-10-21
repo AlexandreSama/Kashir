@@ -1,3 +1,5 @@
 /node_modules/
 config.json
 app.js
+database.sqlite
+infos.json
