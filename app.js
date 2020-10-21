@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const io = require('@pm2/io');
 client.commands = new Discord.Collection();
 const fs = require('fs');
-const ready = require('./Events/ready');
 const prefix = "!";
+const leveling = require('discord-leveling');
 
 let infos = [];
 
@@ -40,12 +39,8 @@ client.on('ready', ready=>{
     });
 })
 
-client.on('message', message => {
-
-    let test = message.mentions.members.first();
-    let test2 = test.joinedAt()
-    console.log(test2)
-
+client.on('message', async message => {
+    
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0]
     let args = messageArray.slice(1)
@@ -54,9 +49,17 @@ client.on('message', message => {
 
     let cmd = client.commands.get(command.slice(prefix.length))
     if (cmd) cmd.run(client, message, args);
-    
-    
     if (message.author.bot) {return;}
+
+    let profile = await leveling.Fetch(message.author.id);
+    leveling.AddXp(message.author.id, 5);
+
+    if(profile.xp + 5 > 1000){
+        leveling.AddLevel(message.author.id, 1);
+        leveling.SetXp(message.author.id, 0)
+        message.channel.send(`Bravo ${message.author.username}, Tu viens de monter au niveau ${profile.level + 1}`)
+    }
+
 });
 
 client.on('guildMemberAdd', member => {
@@ -66,17 +69,4 @@ client.on('guildMemberAdd', member => {
     member.roles.add(role);
 
 })
-
-const latency = io.metric({
-    name: 'latency',
-    type: 'histogram',
-    measurement: 'mean'
-  });
-  const latencyValue = 0;
-  
-  setInterval(() => {
-    latencyValue = Math.round(Math.random() * 100);
-    latency.set(latencyValue);
-  }, 100);
-
 client.login('');
