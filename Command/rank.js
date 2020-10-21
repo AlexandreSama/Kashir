@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args) => {
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "#ffffff";
-    ctx.fillText(`${data.xp} / 1000} XP`, 600, 260);
+    ctx.fillText(`${data.xp} / 1000 XP`, 600, 260);
 
     ctx.textAlign = "left";
     ctx.fillText(user.tag, 300, 120);
