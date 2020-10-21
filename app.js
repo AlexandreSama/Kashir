@@ -3,7 +3,7 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const fs = require('fs');
 const prefix = "!";
-const leveling = require('discord-leveling');
+const db = require('quick.db');
 
 let infos = [];
 
@@ -39,6 +39,21 @@ client.on('ready', ready=>{
     });
 })
 
+function xp(message) {
+        const randomNumber = Math.floor(Math.random() * 10) + 15;
+        db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomNumber)
+        db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, randomNumber)
+        var level = db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1
+        var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`)
+        var xpNeeded = level * 500
+        if(xpNeeded < xp){
+            var newLevel = db.add(`guild_${message.guild.id}_level_${message.author.id}`, 2)
+            db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded)
+            message.channel.send(`${message.author}, tu est monté au niveau ${newLevel}`) 
+        }
+
+}
+
 client.on('message', async message => {
     
     let messageArray = message.content.split(/\s+/g);
@@ -51,14 +66,7 @@ client.on('message', async message => {
     if (cmd) cmd.run(client, message, args);
     if (message.author.bot) {return;}
 
-    let profile = await leveling.Fetch(message.author.id);
-    leveling.AddXp(message.author.id, 5);
-
-    if(profile.xp + 5 > 1000){
-        leveling.AddLevel(message.author.id, 1);
-        leveling.SetXp(message.author.id, 0)
-        message.channel.send(`Bravo ${message.author.username}, Tu viens de monter au niveau ${profile.level + 1}`)
-    }
+    xp(message)
 
 });
 

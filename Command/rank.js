@@ -1,63 +1,38 @@
-const { createCanvas, loadImage} = require('canvas');
+const db = require('quick.db');
+const Canvacord = require('canvacord');
 const Discord = require("discord.js");
-const leveling = require('discord-leveling');
 
 module.exports.run = async (client, message, args) => {
 
     message.delete();
 
-    const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]) || message.author;
+    var user = message.mentions.users.first() || message.author;
+    var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0
+    level = level.toString()
+    let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0
+    var xpNeeded = level * 500 +500
+    let every = db
+    .all()
+    .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
+    .sort((a, b) => b.data - a.data);
+    var rank = every.map(x => x.ID).indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
+    rank = rank.toString();
 
-    const data = await leveling.Fetch(user.id);
-    let calcul = 100 / (data.level * 1000) * data.xp * 7.7;
-    console.log(calcul)
-    if(!data) return message.reply('Ce membre n\'a pas encore de rank');
-
-    const canvas = createCanvas(1000, 333);
-    const ctx = canvas.getContext("2d");
-    const background = await loadImage("./utils/img/wallpaper.jpg");
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
-
-    ctx.beginPath();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = "#ffffff";
-    ctx.globalAlpha = 0.2;
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(180, 216, 770, 65);
-    ctx.fill();
-    ctx.globalAlpha = 1;
-    ctx.strokeRect(180, 216, 770, 65);
-    ctx.stroke();
-
-    ctx.fillStyle = "#e67e22";
-    ctx.globalAlpha = 0.6;
-    ctx.fillRect(180, 216, ((100 / (data.level * 1000)) * data.xp) * 7.7, 65);
-    ctx.fill();
-    ctx.globalAlpha = 1;
-
-    ctx.font = "30px Arial";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#ffffff";
-    ctx.fillText(`${data.xp} / 1000 XP`, 600, 260);
-
-    ctx.textAlign = "left";
-    ctx.fillText(user.tag, 300, 120);
-
-    ctx.font = "50px Arial";
-    ctx.fillText(`Niveau: ${data.level}`, 300, 180);
-    ctx.fillText(`${data.level}`, 47, 180);
-
-    ctx.arc(170, 160, 120, 0, Math.PI * 2, true);
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = "#ffffff";
-    ctx.stroke();
-    ctx.closePath();
-    ctx.clip();
-    const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }));
-    ctx.drawImage(avatar, 40, 40, 250, 250);
-
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "rank.png");
-    message.channel.send(`Carte de LVL pour **${user.username}**`, attachment);
+    const card = new Canvacord.Rank()
+    .setAvatar(user.displayAvatarURL({ format: 'png' }))
+    .setBackground('IMAGE', './utils/img/wallpaper.jpg')
+    .setProgressBar('orange', 'COLOR', true)
+    .setCurrentXP(xp)
+    .setRequiredXP(xpNeeded)
+    .setStatus("dnd")
+    .setProgressBar("#FFFFFF", "COLOR")
+    .setUsername(user.username)
+    .setDiscriminator(user.discriminator)
+     
+    card.build()
+    .then(data => {
+        message.channel.send(new Discord.MessageAttachment(data, "RankCard.png"))
+    });
 }
 
 module.exports.help = {
