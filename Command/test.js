@@ -5,7 +5,7 @@ module.exports.run = async (client, message) => {
 
     message.delete();
 
-    Canvas.registerFont("./DancingScript-Regular.ttf", {family: 'Dancing Script'})
+    Canvas.registerFont("utils/fonts/DancingScript-Regular.ttf", {family: 'Dancing Script'})
 
     const canvas = Canvas.createCanvas(1000, 500);
 
@@ -13,7 +13,7 @@ module.exports.run = async (client, message) => {
 
     const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
+    const background = await Canvas.loadImage('./utils/img/wallpaper.jpg');
     const avatar = await Canvas.loadImage(user.displayAvatarURL({ format: 'jpg' }));
 
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
