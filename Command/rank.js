@@ -9,6 +9,8 @@ module.exports.run = async (client, message, args) => {
     const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]) || message.author;
 
     const data = await leveling.Fetch(user.id);
+    let calcul = 100 / (data.level * 1000) * data.xp * 7.7;
+    console.log(calcul)
     if(!data) return message.reply('Ce membre n\'a pas encore de rank');
 
     const canvas = createCanvas(1000, 333);
@@ -29,7 +31,7 @@ module.exports.run = async (client, message, args) => {
 
     ctx.fillStyle = "#e67e22";
     ctx.globalAlpha = 0.6;
-    ctx.fillRect(180, 216, ((100 / (data.level * 40)) * data.xp) * 7.7, 65);
+    ctx.fillRect(180, 216, ((100 / (data.level * 1000)) * data.xp) * 7.7, 65);
     ctx.fill();
     ctx.globalAlpha = 1;
 
