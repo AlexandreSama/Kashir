@@ -1,15 +1,20 @@
 const Canvas = require('canvas');
 const Discord = require("discord.js");
+const leveling = require('discord-leveling');
 
 module.exports.run = async (client, message) => {
 
     message.delete();
 
-    Canvas.registerFont("utils/fonts/DancingScript-Regular.ttf", {family: 'Dancing Script'})
+    let user = message.mentions.users.first() || message.author
+
+    let output = await leveling.Fetch(user.id)
+
+    let passxp = 1000;
+
+    let before = passxp - output.xp;
 
     const canvas = Canvas.createCanvas(1000, 500);
-
-    let user = message.author;
 
     const ctx = canvas.getContext('2d');
 
@@ -20,9 +25,18 @@ module.exports.run = async (client, message) => {
     ctx.drawImage(avatar, 25, 25, 200, 200);
     ctx.strokeStyle = "#327828";
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
-    ctx.font = '70px "Dancing Script"';
+    ctx.font = '70px "Sans Serif"';
     ctx.fillStyle = "#ff0000";
-    ctx.fillText(user.tag, canvas.width / 4.0, canvas.height / 3.9, 320);
+
+    //Username of the user
+    ctx.fillText(user.tag, canvas.width / 3.5, canvas.height / 3.9, 320);
+
+    //Xp of the user
+    ctx.fillText(`${output.xp} xp`, 5.9, canvas.height / 1);
+
+    //Missing XP before lvl up
+    ctx.fillText(`${before} xp restant avant de \n monter de niveau`, canvas.width / 1.5, canvas.height / 1.2, 320);
+
     ctx.beginPath();
     ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
 	ctx.closePath();
