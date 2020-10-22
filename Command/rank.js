@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
 
     var user = message.mentions.users.first() || message.author;
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0
-    level = level.toString()
+    let niveau = parseInt(level)
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0
     var xpNeeded = level * 500 +500
     let every = db
@@ -16,12 +16,14 @@ module.exports.run = async (client, message, args) => {
     .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
     .sort((a, b) => b.data - a.data);
     var rank = every.map(x => x.ID).indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
-    rank = rank.toString();
+    let rang = parseInt(rank)
 
     const card = new Canvacord.Rank()
     .setAvatar(user.displayAvatarURL({ format: 'png' }))
     .setBackground('IMAGE', './utils/img/wallpaper.jpg')
     .setProgressBar('orange', 'COLOR', true)
+    .setRank(rang, "Rang", false)
+    .setLevel(niveau, "Niveau ", true)
     .setCurrentXP(xp)
     .setRequiredXP(xpNeeded)
     .setStatus("dnd")
