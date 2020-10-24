@@ -40,14 +40,6 @@ fs.readdir('./Events/', (error, f) => {
   });
 });
 
-client.on('ready', (ready)=>{
-  infos.push(client.guilds.cache.size);
-  fs.writeFile('infos.json', JSON.stringify(infos), (err) => {
-    if (err) throw err;
-    console.log('Le fichier a été sauvegarder!');
-  });
-});
-
 function xp(message) {
   const randomNumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomNumber);
@@ -79,8 +71,17 @@ client.on('message', async (message) => {
 });
 
 client.on('guildMemberAdd', (member) => {
-  console.log(`L'utilisateur'` + member.user.tag + `a rejoins le serveur!`);
+  let channelName = 'welcome';
+  const channel = client.channels.cache.find(channel => channel.name === channelName)
+  channel.send(member.user.tag + ` nous a rejoins, bienvenue a toi !`)
   const role = member.guild.roles.cache.find((role) => role.name === 'Les copains');
   member.roles.add(role);
 });
+
+client.on('guildMemberRemove', (member) => {
+  console.log(`L'utilisateur'` + member.user.tag + `a quitté le serveur, dommage!`);
+  let channelName = 'goodbye';
+  const channel = client.channels.cache.find(channel => channel.name === channelName)
+  channel.send(member.user.tag + ` nous a quitté malheureusement !`);
+})
 client.login('');
