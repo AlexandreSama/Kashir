@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args) => {
             console.log(err)
             message.channel.send("Attention, vérifie ton steamid ! Sinon, l'API est en panne !")
         }
-        
+
         const canvas = Canvas.createCanvas(700, 250);
         const ctx = canvas.getContext('2d');
 
@@ -59,5 +59,5 @@ module.exports.run = async (client, message, args) => {
 
 
 module.exports.help = {
-    name: 'rankcsgo'
+    name: 'infocsgo'
 };
