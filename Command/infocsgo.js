@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args) => {
         const canvas = Canvas.createCanvas(700, 250);
         const ctx = canvas.getContext('2d');
 
-        const background = await Canvas.loadImage('./utils/img/wallpaper.jpg');
+        const background = await Canvas.loadImage('https://media.giphy.com/media/cOinCESu87UR5AG76a/giphy.gif');
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
         ctx.strokeStyle = '#74037b';
