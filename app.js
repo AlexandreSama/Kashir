@@ -1,6 +1,3 @@
-/* eslint-disable require-jsdoc */
-/* eslint-disable max-len */
-/* eslint-disable linebreak-style */
 const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -55,6 +52,7 @@ function xp(message) {
 }
 
 client.on('message', async (message) => {
+
   const messageArray = message.content.split(/\s+/g);
   const command = messageArray[0];
   const args = messageArray.slice(1);
@@ -78,10 +76,4 @@ client.on('guildMemberAdd', (member) => {
   member.roles.add(role);
 });
 
-client.on('guildMemberRemove', (member) => {
-  console.log(`L'utilisateur'` + member.user.tag + `a quitté le serveur, dommage!`);
-  let channelName = 'goodbye';
-  const channel = client.channels.cache.find(channel => channel.name === channelName)
-  channel.send(member.user.tag + ` nous a quitté malheureusement !`);
-})
 client.login('');
