@@ -9,27 +9,21 @@ module.exports.run = (client, message) => {
 
     let messageArray = message.content.substring(commandName.length).split(" | ");
 
-    let infos = { 
-        ip: `${messageArray[0]}`,
-        user: `${messageArray[1]}`,
-        password: `${messageArray[2]}`,
-    };
-    console.log(infos)
+    let infos = [];
 
-    let infostringified = JSON.stringify(infos, null, 2);
+    infos.push({ip: messageArray[0], user: messageArray[1], password: messageArray[2], database: messageArray[3] })
 
-    fs.writeFileSync('config.json', infostringified);
+    let data = JSON.stringify(infos);
+    fs.writeFileSync('config.json', data);
 
-    let config = '../config.json'
-
-    //Variable de connexion a la BDD
-    if (config.password == undefined) {
+    // Variable de connexion a la BDD
+    if (infos[0]['password'].length <= 0) {
         var connection = mysql.createConnection({
             host: `${messageArray[0]}`,
             user : `${messageArray[1]}`,
         })
         console.log("ici sans mot de passe")
-    }else if (config.password != undefined) {
+    }else if (infos[0]['password'].length > 0) {
         var connection = mysql.createConnection({
             host: `${messageArray[0]}`,
             user : `${messageArray[1]}`,
