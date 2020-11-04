@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const request = require(`request`);
 const mysql = require('mysql');
 
 module.exports.run = (client, message) => {
