@@ -8,25 +8,32 @@ module.exports.run = (client, message) => {
     message.delete();
 
     let user = message.author;
-    const commandName = "!createdatabase ";
-    let config = '../config.json'
-    let category = config.ficheCategoryName;
 
-    var connection = mysql.createConnection({
-        host: config.ip,
-        user : config.user,
-        password: config.password,
-        database: config.database,
-    });
+    fs.readFile('config.json', (err, data) => {
+        if (err) throw err;
+        let parsedData = JSON.parse(data)
+        let categoryName = parsedData[0]['ficheCategoryName'];
+        let category = message.guild.channels.cache.find(cat=> cat.name === categoryName)
+        var connection = mysql.createConnection({
+            host: parsedData[0]['ip'],
+            user : parsedData[0]['user'],
+            password: parsedData[0]['password'],
+            database: parsedData[0]['database'],
+        });
+        //Connexion a la BDD
+        connection.connect(console.log("Connexion Réussi"));
 
-    connection.connect(console.log("Connexion Réussi"));
+        message.guild.channels.create("fiche-de-" + user.username, {
+            type: 'text',
+            parent: category.id
+        }).then((value) => {
+            let channel = message.guild.channels.cache.find(channel => channel.name === 'fiche-de-' + user.username.toLowerCase())
+            channel.send("Bienvenue <@" + user.id + ">" + " dans ton Salon ! Je suis a toi dans un instant !")
+        });
+});
 
-    message.guild.channels.create("Fiche de " + user, {
-        type: 'text',
-    })
-
-};
+}
 
 module.exports.help = {
-    name: 'createPlug'
-};
+    name: 'createplug'
+}

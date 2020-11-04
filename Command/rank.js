@@ -7,6 +7,7 @@ module.exports.run = async (client, message, args) => {
     message.delete();
 
     var user = message.mentions.users.first() || message.author;
+    console.log(user)
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0
     let niveau = parseInt(level)
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0
