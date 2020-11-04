@@ -21,12 +21,12 @@ module.exports.run = (client, message) => {
         });
         //Connexion a la BDD
         connection.connect(console.log("Connexion Réussi"));
+        let channel = message.guild.channels.cache.find(channel => channel.name === 'fiche-de-' + user.username.toLowerCase())
 
         message.guild.channels.create("fiche-de-" + user.username, {
             type: 'text',
             parent: category.id
         }).then((value) => {
-            let channel = message.guild.channels.cache.find(channel => channel.name === 'fiche-de-' + user.username.toLowerCase())
             channel.send("Bienvenue <@" + user.id + ">" + " dans ton Salon ! Je suis a toi dans un instant !")
         });
 });
