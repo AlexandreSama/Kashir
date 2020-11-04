@@ -1,4 +1,4 @@
-# This bot is continuously in development, please use it with caution and submit your errors be on Github be on this Discord: https://discord.gg/sC8FJdqq
+# This bot is continuously in development, please use it with caution and submit your errors on Github be or on this Discord: https://discord.gg/sC8FJdqq
 
 <img src="https://zupimages.net/up/20/43/61o3.png">
 
