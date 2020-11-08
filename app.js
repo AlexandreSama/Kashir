@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const message = new Discord.Message();
 client.commands = new Discord.Collection();
 const fs = require('fs');
 const prefix = '!';
 const db = require('quick.db');
 
 const infos = [];
-
 fs.readdir('./Command/', (error, f) => {
   if (error) {
     return console.error(error);
