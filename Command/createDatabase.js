@@ -61,16 +61,24 @@ module.exports.run = (client, message) => {
             console.log(error);
         }if(result){
             connection.query(`CREATE TABLE quests (ID INT NOT NULL AUTO_INCREMENT, nom VARCHAR(200) NOT NULL, description TEXT NOT NULL, recompense TEXT NOT NULL, PRIMARY KEY (ID))`, function(error, result){
-                if(error){
-                    connection.end();
-                    message.channel.send('Erreur ! Veuillez contacter votre administrateur')
-                }if(result){
-                    console.log("yes !")
-                    message.channel.send("Base de Donnée crée avec succés")
-                }
-            })
-        }
-    })}})}})}})
+        if(error){
+            connection.end();
+            message.channel.send(error)
+        }if(result){
+            connection.query(`CREATE TABLE fiche (ID INT NOT NULL AUTO_INCREMENT, idaccount BIGINT NOT NULL, nom VARCHAR(200) NOT NULL, prenom VARCHAR(200) NOT NULL, sexe VARCHAR(200) NOT NULL, age INT NOT NULL, race VARCHAR(200) NOT NULL, physique TEXT NOT NULL, mental TEXT NOT NULL, pouvoirs INT NOT NULL, PRIMARY KEY (ID))`, function(error, result){
+        if(error){
+            connection.end();
+            console.log(error)
+            message.channel.send('Erreur ! Veuillez contacter votre administrateur')
+        }if(result){
+            console.log("yes !")
+            message.channel.send("Base de Donnée crée avec succés")
+        }})
+        }})
+        }})
+        }})
+        }})
+        }})
 }
 
 module.exports.help = {
