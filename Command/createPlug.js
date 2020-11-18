@@ -6,14 +6,13 @@ const mysql = require('mysql');
 module.exports.run = (client, message) => {
 
     const user = message.author;
-    console.log(user.id)
     let fiche = [];
 
     fs.readFile('config.json', (err, data) => {
         if (err) throw err;
         let parsedData = JSON.parse(data)
-        let categoryName = parsedData[0]['ficheCategoryName'];
-        let category = message.guild.channels.cache.find(cat=> cat.name === categoryName)
+        let categoryFicheName = parsedData[0]['ficheCategoryName'];
+        let categoryFiche = message.guild.channels.cache.find(cat=> cat.name === categoryFicheName)
         var connection = mysql.createConnection({
             host: parsedData[0]['ip'],
             user : parsedData[0]['user'],
@@ -25,7 +24,7 @@ module.exports.run = (client, message) => {
 
         message.guild.channels.create("fiche-de-" + user.username, {
             type: 'text',
-            parent: category.id
+            parent: categoryFiche.id
         }).then(() => {
             let speciChannel = "fiche-de-" + user.username.toLowerCase();
             let channel = message.guild.channels.cache.find(channel => channel.name === speciChannel)
@@ -44,7 +43,6 @@ module.exports.run = (client, message) => {
                 console.log("ok")
             }else {
                 fiche.push(lastMessage.content)
-                console.log(fiche)
             }
             if(fiche.length === 1){
                 console.log("étape 1 !")
@@ -72,7 +70,6 @@ module.exports.run = (client, message) => {
             }
             if(fiche.length === 3){
                 console.log("étape 3 !")
-                console.log(fiche)
                 connection.query(`UPDATE fiche SET sexe = '${fiche[2]}' WHERE idaccount = "${user.id}"`, function (error, result) {
                     if(error){
                         console.log(error)
@@ -84,13 +81,113 @@ module.exports.run = (client, message) => {
             }
             if(fiche.length === 4){
                 console.log("étape 4 !")
-                console.log(fiche)
                 connection.query(`UPDATE fiche SET age = '${fiche[3]}' WHERE idaccount = "${user.id}"`, function (error, result) {
                     if(error){
                         console.log(error)
                     }
                     if(result){
                         channel.send("Ok ! Maintenant sa race je te prie")
+                    }
+                })
+            }
+            if(fiche.length === 5){
+                console.log("étape 5 !")
+                connection.query(`UPDATE fiche SET race = '${fiche[4]}' WHERE idaccount = "${user.id}"`, function (error, result) {
+                    if(error){
+                        console.log(error)
+                    }
+                    if(result){
+                        channel.send("Ok ! Maintenant, décris moi son physique s'il te plait (pas plus de 2000 caractères !)")
+                    }
+                })
+            }
+            if(fiche.length === 6){
+                console.log("étape 6 !")
+                connection.query(`UPDATE fiche SET physique = '${fiche[5]}' WHERE idaccount = "${user.id}"`, function (error, result) {
+                    if(error){
+                        console.log(error)
+                    }
+                    if(result){
+                        channel.send("Ok ! Maintenant, décris moi son caractère s'il te plait (toujours pas plus de 2000 caractères !)")
+                    }
+                })
+            }
+            if(fiche.length === 7){
+                console.log("étape 7 !")
+                connection.query(`UPDATE fiche SET mental = '${fiche[6]}' WHERE idaccount = "${user.id}"`, function (error, result) {
+                    if(error){
+                        console.log(error)
+                    }
+                    if(result){
+                        channel.send("Ok ! Maintenant, décris moi son pouvoir s'il te plait (toujours pas plus de 2000 caractères !)")
+                    }
+                })
+            }
+            if(fiche.length === 8){
+                console.log("étape 8 !")
+                connection.query(`UPDATE fiche SET pouvoirs = '${fiche[7]}' WHERE idaccount = "${user.id}"`, function (error, result) {
+                    if(error){
+                        console.log(error)
+                    }
+                    if(result){
+                        channel.send("Parfait ! Ta candidature a été sauvegardé et a été envoyé aux modérateurs, ils viendrons vers toi rapidement !")
+                        let categoryStaffName = parsedData[0]['staffCategoryName'];
+                        let categoryStaff = message.guild.channels.cache.find(cat=> cat.name === categoryStaffName)
+                        let speciChannel = "fiche-a-valider";
+                        let channelStaff = message.guild.channels.cache.find(channel => channel.name === speciChannel)
+                        console.log(channelStaff)
+                        if(channelStaff === undefined){
+                            message.guild.channels.create("fiche-a-valider", {
+                                type: 'text',
+                                parent: categoryStaff.id
+                            }).then(() => {
+                                connection.query(`SELECT * FROM fiche WHERE idaccount = ${user.id}`, function (error, result) {
+                                    if(error){
+                                        message.channel.send(error)
+                                    }
+                                    if(result){
+                                        let speciChannelBefore = "fiche-a-valider";
+                                        let channelStaffAfter = message.guild.channels.cache.find(channel => channel.name === speciChannelBefore)
+                                        var data = JSON.stringify(result)
+                                        //On rend sous forme de JSON la var data
+                                        var finalData = JSON.parse(data)
+                                        console.log(finalData)
+                                        //Puis on envois tout dans le channel réservé aux staff !
+                                        channelStaffAfter.send("Fiche de "+ user.username)
+                                        channelStaffAfter.send("nom : " + finalData[0].nom)
+                                        channelStaffAfter.send("prénom : " + finalData[0].prenom)
+                                        channelStaffAfter.send("Age : " + finalData[0].age)
+                                        channelStaffAfter.send("Description Physique : " + finalData[0].physique)
+                                        channelStaffAfter.send("Description Mental : " + finalData[0].mental)
+                                        channelStaffAfter.send("Description de son Pouvoir : " + finalData[0].pouvoirs)
+                                        connection.end();
+                                    }
+                                })
+                            });
+                        }else{
+                            connection.query(`SELECT * FROM fiche WHERE idaccount = ${user.id}`, function (error, result) {
+                                if(error){
+                                    message.channel.send(error)
+                                }
+                                if(result){
+                                    var data = JSON.stringify(result)
+                                    //On rend sous forme de JSON la var data
+                                    var finalData = JSON.parse(data)
+                                    console.log(finalData)
+                                    let speciChannelStaff = "fiche-a-valider";
+                                    let channelStaffAfter = message.guild.channels.cache.find(channel => channel.name === speciChannelStaff)
+                                    //Puis on envois tout dans le channel réservé aux staff !
+                                    channelStaffAfter.send("Fiche de "+ user.username)
+                                    channelStaffAfter.send("nom : " + finalData[0].nom)
+                                    channelStaffAfter.send("prénom : " + finalData[0].prenom)
+                                    channelStaffAfter.send("Age : " + finalData[0].age)
+                                    channelStaffAfter.send("Description Physique : " + finalData[0].physique)
+                                    channelStaffAfter.send("Description Mental : " + finalData[0].mental)
+                                    channelStaffAfter.send("Description de son Pouvoir : " + finalData[0].pouvoirs)
+                                    connection.end();
+                                }
+                            })
+                        }
                     }
                 })
             }

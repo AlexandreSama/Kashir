@@ -16,6 +16,7 @@ module.exports.run = (client, message) => {
 
     request('https://coronavirusapi-france.now.sh/LiveDataByDepartement?Departement=' + messageArray[0], { json: true }, (err, res, body) => {
         if (err) { message.channel.send('Vérifie le département que tu m\'a donné, je ne le trouve pas'); }
+        console.log(body)
         embed.addFields(
             { name: 'Nom du Département', value: body['LiveDataByDepartement'][0]['nom']},
             { name: 'Date des informations', value: body['LiveDataByDepartement'][0]['date']},
