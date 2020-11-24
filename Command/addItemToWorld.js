@@ -9,10 +9,13 @@ module.exports.run = (client, message) => {
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!additemtoworld ";
 
+    //On récupère le channel spécifique
     const channel = client.channels.cache.get(748223617665466448);
 
+    //On découpe le message en enlevant le nom de la commande et ne splitant a chaque |
     let messageArray = message.content.substring(commandName.length).split(" | ");
 
+    //On spécifique que config est un fichier json
     let config = '../config.json'
 
     //Variable de connexion a la BDD
@@ -26,13 +29,18 @@ module.exports.run = (client, message) => {
     //Connexion a la BDD
     connection.connect(console.log("Connexion Réussi"));
 
+    //On écris des données dans la BDD
     connection.query(`INSERT INTO items (name, description) VALUES ("${messageArray[0]}", "${messageArray[1]}")`, function(error, result) {
         if(error){
+            // Je met un console.log le temps de trouver une solution pour les logs et j'envoi un message
             console.log(error);
             message.channel.send("Erreur, veuillez vérifier le nom et/ou la description de l'item");
+            connection.end();
         }
         if(result){
+            //J'envoi un message et je ferme la connexion
             message.channel.send("Item enregistré avec succés !")
+            connection.end();
         }
     })
 

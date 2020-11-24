@@ -3,17 +3,23 @@ const request = require('request');
 
 module.exports.run = (client, message) => {
 
+    //On supprime le message
     message.delete();
 
+    //On récupère les infos de l'utilisateur
     let user = message.author;
+    //On spécifie que la commande est "!covid"
     const commandName = "!covid ";
 
+    //On découpe le message en enlevant le nom de la commande pour garder le département
     let messageArray = message.content.substring(commandName.length).split(" ");
 
+    //On crée un embed
     const embed = new Discord.MessageEmbed()
     .setColor("#0000FF")
     .setAuthor(user.username)
-
+    
+    //On crée une requête a une api spécifique et on insère les données dans l'embed avant de l'envoyer
     request('https://coronavirusapi-france.now.sh/LiveDataByDepartement?Departement=' + messageArray[0], { json: true }, (err, res, body) => {
         if (err) { message.channel.send('Vérifie le département que tu m\'a donné, je ne le trouve pas'); }
         console.log(body)

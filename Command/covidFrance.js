@@ -3,16 +3,20 @@ const request = require('request');
 
 module.exports.run = (client, message) => {
 
+    //On supprime le message
     message.delete();
 
+    //On récupère les infos de l'utilisateur
     let user = message.author;
 
+    //On crée un embed avec toutes les infos nécessaires
     const embed = new Discord.MessageEmbed()
     .setColor("#0000FF")
     .setTitle('Infos Covid-19 France')
     .setAuthor(user.username)
 	.setDescription('Les dernières statistiques du Covid-19 en France')
 
+    //On crée une requête a une api spécifique et on insère les données dans l'embed avant de l'envoyer
     request('https://coronavirusapi-france.now.sh/FranceLiveGlobalData', { json: true }, (err, res, body) => {
         if (err) { return console.log(err); }
         embed.addFields(
