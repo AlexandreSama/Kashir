@@ -5,14 +5,22 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message) => {
 
+    //On récupère les infos de l'utilisateur
     const user = message.author;
+    //On crée un tableau vide
     let fiche = [];
 
+    //On va lire un fichier spécifique
     fs.readFile('config.json', (err, data) => {
+        //Si erreur, on lance l'erreur dans la console
         if (err) throw err;
+        //On parse les données du fichier
         let parsedData = JSON.parse(data)
+        //On récupère le nom de la catégorie pour les fiches
         let categoryFicheName = parsedData[0]['ficheCategoryName'];
+        //On cherche la catégorie pour les fiches sur le serveur
         let categoryFiche = message.guild.channels.cache.find(cat=> cat.name === categoryFicheName)
+        //Et ici on se connecte a MySQL
         var connection = mysql.createConnection({
             host: parsedData[0]['ip'],
             user : parsedData[0]['user'],

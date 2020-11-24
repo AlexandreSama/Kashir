@@ -4,15 +4,22 @@ const mysql = require('mysql');
 
 module.exports.run = (client, message) => {
 
+    //On supprime le message
     message.delete();
+
+    // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!createdatabase ";
 
+    // on retire le commandName du message et on découpe chaque String a chaque |
     let messageArray = message.content.substring(commandName.length).split(" | ");
 
+    // On crée un array vide
     let infos = [];
 
+    //On push dans le tableau les infos que l'on veut
     infos.push({ip: messageArray[0], user: messageArray[1], password: messageArray[2], database: messageArray[3] })
 
+    //On rend le tableau sous forme de JSON et on crée un fichier avec le tableau dedans
     let data = JSON.stringify(infos);
     fs.writeFileSync('config.json', data);
 
@@ -22,14 +29,12 @@ module.exports.run = (client, message) => {
             host: `${messageArray[0]}`,
             user : `${messageArray[1]}`,
         })
-        console.log("ici sans mot de passe")
     }else if (infos[0]['password'].length > 0) {
         var connection = mysql.createConnection({
             host: `${messageArray[0]}`,
             user : `${messageArray[1]}`,
             password: `${messageArray[2]}`,
         })
-        console.log("ici avec mot de passe")
     }
 
     //Connexion a la BDD
@@ -40,6 +45,7 @@ module.exports.run = (client, message) => {
         }
     })
 
+    //Ici on crée tout les tables et la base de données nécessaires (ce qui peut être long et fastidieux quand on y pense)
     connection.query(`CREATE DATABASE ${messageArray[3]};`, function(error, result){
         if(error){
             connection.end();
