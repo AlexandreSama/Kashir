@@ -33,7 +33,7 @@ module.exports.run = (client, message) => {
     connection.query(`DELETE FROM quests WHERE id = ${number}`, function(error, results) {
         //Si erreurs
         if (error){
-            //On envoie un message d'erreur
+            // Je met un console.log le temps de trouver une solution pour les logs
             console.log(error);
             message.channel.send("Erreur, vérifier l'id que vous avez indiqué")
         //Si résultats

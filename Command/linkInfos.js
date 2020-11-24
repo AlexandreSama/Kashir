@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 module.exports.run = (client, message) => {
+    //On supprime le message pour rendre le channel plus propre
     message.delete();
 
+    //On crée un nouvel embed contenant nos infos
     const embed = new Discord.MessageEmbed()
     .setColor("#5361ad")
     .setDescription("Voici les liens importants pour le bot !")
@@ -16,6 +18,7 @@ module.exports.run = (client, message) => {
     )
     .setTimestamp()
 
+    //Puis on envoie l'embed a travers un simple message
     message.channel.send(embed)
 }
 

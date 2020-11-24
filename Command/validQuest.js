@@ -31,26 +31,29 @@ module.exports.run = (client, message) => {
     connection.query(`SELECT recompense FROM quests WHERE id = ${messageArray[0]}`, function(error, results) {
         //Si erreurs
         if(error){
+            // Je met un console.log le temps de trouver une solution pour les logs
             console.log(error);
         }
         //Si Résultats
         if (results) {
-            console.log(results)
             var data = JSON.stringify(results)
             //On rend sous forme de JSON la var data
             var finalData = JSON.parse(data)
-            console.log(finalData);
             //Une autre requête SQL est envoyé pour augmenter ou baisser la quantité d'argent d'un joueur
             connection.query(`UPDATE bank SET money = ${finalData[0].recompense} WHERE idaccount = "${messageArray[1]}"`, function (errors, result) {
                 //Si erreurs
                 if(errors) {
+                    // Je met un console.log le temps de trouver une solution pour les logs
                     console.log(errors);
+                    // On ferme la connexion
                     connection.end();
                     message.author.send("Erreur, vérifier votre ID de quête ou l'id du joueur");
                 }
                 //Si Résultats
                 if(result){
                     message.author.send("Récompense transféré avec succés !")
+                    // On ferme la connexion
+                    connection.end();
                 }
             })
         }

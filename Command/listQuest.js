@@ -24,6 +24,7 @@ module.exports.run = (client, message) => {
     connection.query("select * FROM quests", function(error, results){
         //Si erreurs
         if (error) {
+            // Je met un console.log le temps de trouver une solution pour les logs
             console.log(error);
             message.channel.send("Il n'y a aucune quête pour aujourd'hui malheureusement")
         //Si résultats
@@ -33,7 +34,6 @@ module.exports.run = (client, message) => {
             //On rend sous forme de JSON la var data
             var finalData = JSON.parse(data)
             //Pour chaque donnée du JSON, on envoie un message contenant la(les) quêtes disponibles
-            console.log(finalData)
             finalData.forEach(function(data, index) {
                 message.channel.send(`- id : ${data.id} \n - nom : ${data.nom} \n - description : ${data.description} \n - récompense : ${data.recompense}` )
             })
