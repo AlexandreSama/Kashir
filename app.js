@@ -1,10 +1,12 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const message = new Discord.Message();
 client.commands = new Discord.Collection();
 const fs = require('fs');
 const prefix = '!';
 const db = require('quick.db');
+const canvas = require("discord-canvas"),
+  goodbyeCanvas = new canvas.Goodbye(),
+  welcomeCanvas = new canvas.Welcome();
 
 const infos = [];
 fs.readdir('./Command/', (error, f) => {
@@ -68,12 +70,61 @@ client.on('message', async (message) => {
   xp(message);
 });
 
-client.on('guildMemberAdd', (member) => {
+client.on('guildMemberAdd', async member => {
+
   let channelName = 'welcome';
-  const channel = client.channels.cache.find(channel => channel.name === channelName)
-  channel.send(member.user.tag + ` nous a rejoins, bienvenue a toi !`)
-  const role = member.guild.roles.cache.find((role) => role.name === 'Les copains');
-  member.roles.add(role);
+  const channel = member.guild.channels.cache.find(channel => channel.name === channelName)
+  let guildName = member.guild.name;
+  let guildCount = member.guild.memberCount;
+  let memberAvatar = member.user.displayAvatarURL({dynamic : true});
+
+  let image = await welcomeCanvas
+  .setUsername(member.user.username)
+  .setDiscriminator(member.user.discriminator)
+  .setMemberCount(guildCount)
+  .setGuildName(guildName)
+  .setAvatar(memberAvatar)
+  .setText("title", "Bienvenue")
+  .setText("message", "Bienvenue sur le serveur {server}")
+  .setText("member-count", "- {count}ème membres")
+  .setColor("border", "#8015EA")
+  .setColor("username-box", "#8015EA")
+  .setColor("discriminator-box", "#8015EA")
+  .setColor("message-box", "#8015EA")
+  .setColor("title", "#8015EA")
+  .setColor("avatar", "#8015EA")
+  .toAttachment();
+
+  let attachment = new Discord.MessageAttachment(image.toBuffer(), "welcome-image.png");
+
+  channel.send(attachment);
 });
+
+client.on('guildMemberRemove', async member => {
+
+    let myChannel = 'goodbye'
+    let category = member.guild.channels.cache.find(cat=> cat.name === myChannel)
+    let guildName = member.guild.name;
+    let guildCount = member.guild.memberCount;
+
+    let image = await goodbyeCanvas
+    .setUsername(member.user.username)
+    .setDiscriminator(member.user.discriminator)
+    .setMemberCount(guildCount)
+    .setGuildName(guildName)
+    .setText("title", "Adieu")
+    .setText("message", "s'en va du serveur {server}")
+    .setText("member-count", "- nous ne sommes plus que {count} membres")
+    .setColor("border", "#8015EA")
+    .setColor("username-box", "#8015EA")
+    .setColor("discriminator-box", "#8015EA")
+    .setColor("message-box", "#8015EA")
+    .setColor("title", "#8015EA")
+    .toAttachment();
+
+    let attachment = new Discord.MessageAttachment(image.toBuffer(), "goodbye-image.png");
+  
+    category.send(attachment)
+})
 
 client.login('');
