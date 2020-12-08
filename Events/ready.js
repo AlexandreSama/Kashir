@@ -1,5 +1,6 @@
-module.exports = (client, fs) => {
+module.exports = (client) => {
+    
     console.log("Bot Prêt");
-    //client.user.setAvatar('./avatar.jpg');
-    client.user.setActivity("Fallais peut-être changé d'activité un jour", {type: 'PLAYING'})
+
+    client.user.setActivity("Le Necronomicon pour les nuls", {type: 'PLAYING'})
 };
