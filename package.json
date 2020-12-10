@@ -1,6 +1,6 @@
 {
   "name": "kashir",
-  "version": "1.0.0",
+  "version": "1.2.4.0",
   "description": "Bot pour Hostalia",
   "main": "app.js",
   "dependencies": {
