@@ -72,11 +72,14 @@ client.on('message', async (message) => {
 
 client.on('guildMemberAdd', async member => {
 
-  let channelName = 'welcome';
+  let channelName = 'allées-et-venus';
   const channel = member.guild.channels.cache.find(channel => channel.name === channelName)
   let guildName = member.guild.name;
   let guildCount = member.guild.memberCount;
   let memberAvatar = member.user.displayAvatarURL({dynamic : true});
+  let role = message.guild.roles.find(r => r.name === "Adorateurs");
+
+  member.roles.add(role)
 
   let image = await welcomeCanvas
   .setUsername(member.user.username)
@@ -102,7 +105,7 @@ client.on('guildMemberAdd', async member => {
 
 client.on('guildMemberRemove', async member => {
 
-    let myChannel = 'goodbye'
+    let myChannel = 'allées-et-venus'
     let category = member.guild.channels.cache.find(cat=> cat.name === myChannel)
     let guildName = member.guild.name;
     let guildCount = member.guild.memberCount;
