@@ -3,3 +3,4 @@ config.json
 app.js
 database.sqlite
 infos.json
+json.sqlite
