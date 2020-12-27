@@ -4,3 +4,4 @@ app.js
 database.sqlite
 infos.json
 json.sqlite
+conf.json
