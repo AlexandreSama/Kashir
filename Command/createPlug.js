@@ -28,21 +28,26 @@ module.exports.run = (client, message) => {
             database: parsedData[0]['database'],
         });
 
+        //Connexion a la BDD
         connection.connect(console.log("Connexion réussi !"))
 
+        //Création du channel spécifique a l'Utilisateur
         message.guild.channels.create("fiche-de-" + user.username, {
             type: 'text',
             parent: categoryFiche.id
+            //Ensuite on envoi un message pour ping l'Utilisateur et lui poser les questions
         }).then(() => {
             let speciChannel = "fiche-de-" + user.username.toLowerCase();
             let channel = message.guild.channels.cache.find(channel => channel.name === speciChannel)
             channel.send("Bienvenue <@" + user.id + ">" + "nous allons pouvoir commencer ! Je vais te poser une série de question, et tu va m\'y répondre a chaque fois. C\'est parti !")
             channel.send("Quel est le nom de ton personnage ?")
         });
+        //Si un message est envoyé dans ce channel
         client.on('message', message => {
             if (message.author.bot) {
                 return;
             }
+            //On get le channel spécifié
             let speciChannel = "fiche-de-" + user.username.toLowerCase();
             let channel = message.guild.channels.cache.find(channel => channel.name === speciChannel)
             channel.fetch({limit: 1 }).then(() => {
