@@ -1,7 +1,7 @@
 {
   "name": "kashir",
   "version": "1.2.4.0",
-  "description": "Bot pour Hostalia",
+  "description": "Kashir, un bot Spécial RP",
   "main": "app.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
