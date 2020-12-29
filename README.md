@@ -46,7 +46,7 @@ npm install
 
 changez votre Token dans le app.js, invitez le bot sur votre serveur et lancer-le!
 
-## Contributing
+## Contribuer
 
 Les Pull requests sont la bienvenue. Pour les changements majeurs, veuillez d'abord ouvrir un ticket pour discuter de ce que vous aimeriez changer merci: D
 
