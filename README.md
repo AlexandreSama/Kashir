@@ -25,3 +25,29 @@ change your Token in your app.js, invite the bot to your server and run it !
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change thanks :D
 
 Please make sure to update tests as appropriate.
+
+# Ce bot est continuellement en développement, S'il vous plait utiliser le avec prudence et montrer vos erreurs sur Github ou sur ce Discord: https://discord.gg/sC8FJdqq
+
+Kashir est un bot Discord.JS pour serveur de jeu de rôle. Il crée une économie viable (les sauvegardes se feront sous MySQL) et gère indépendamment les PNJ.
+
+## Requis
+
+- Base de données
+- Un serveur RolePlay
+- quelque chose pour faire fonctionner le bot en continu (VPS, Raspberry, etc.)
+
+## Installation
+
+Téléchargez ou clonez ce Repository (`git clone https://github.com/AlexandreSama/Kashir.git`) et exécutez la commande suivante:
+
+```bash
+npm install
+```
+
+changez votre Token dans le app.js, invitez le bot sur votre serveur et lancer-le!
+
+## Contributing
+
+Les Pull requests sont la bienvenue. Pour les changements majeurs, veuillez d'abord ouvrir un ticket pour discuter de ce que vous aimeriez changer merci: D
+
+Veuillez vous assurer de mettre à jour les tests le cas échéant.
