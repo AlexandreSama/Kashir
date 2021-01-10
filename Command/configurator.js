@@ -9,8 +9,13 @@ module.exports.run = (client, message) => {
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!config ";
 
+    message.channel.send("Met tes informations sous ce format : 'ip' 'nom d'utilisateur' 'mot de passe' 'nom de la base de données' 'nom de la catégorie réservé aux fiches' 'nom de la catégorie réservé au staff' (ne pas oubliez l'espace entre chaque information, et pas besoin de mettre les infos entre '')")
+
+    if(message.author.bot){
+        return ;
+    }else{
     // on retire le commandName du message et on découpe chaque String a chaque |
-    let messageArray = message.content.substring(commandName.length).split(" | ");
+    let messageArray = message.content.substring(commandName.length).split(" ");
 
     // On crée un array vide
     let infos = [];
@@ -78,6 +83,7 @@ module.exports.run = (client, message) => {
             fs.writeFileSync('config.json', data);
         }})}})}})}})}})}})
 
+    }
 }
 
 module.exports.help = {
