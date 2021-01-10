@@ -5,8 +5,6 @@ module.exports.run = (client, message) => {
     //Suppression du message de l'utilisateur
     message.delete();
 
-    const channel = client.channels.cache.get(748223617665466448);
-
     let config = '../config.json'
 
     //Variable de connexion a la BDD

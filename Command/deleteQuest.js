@@ -9,8 +9,6 @@ module.exports.run = (client, message) => {
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!deletequest ";
 
-    const channel = client.channels.cache.get(748223617665466448);
-
     //On récupère le message et on découpe le commandName
     let messages = message.content.substring(commandName.length);
     //On transforme en nombre le String

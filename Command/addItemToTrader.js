@@ -8,10 +8,7 @@ module.exports.run = (client, message) => {
 
      // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
      const commandName = "!additemtotrader ";
-
-     //On récupère un channel spécifique
-     const channel = client.channels.cache.get(748223617665466448);
-
+     
      //On découpe le message en enlevant le nom de la commande et en splitant a chaque |
      let messageArray = message.content.substring(commandName.length).split(" | ");
 

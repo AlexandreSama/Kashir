@@ -1,16 +1,11 @@
 const Discord = require('discord.js');
 const mysql = require('mysql');
 const fs = require('fs');
-const { parse } = require('path');
-const { info } = require('console');
 
 module.exports.run = (client, message) => {
 
     //On supprime le message
     message.delete();
-
-    //Ici on récupère le channel demandé
-    const channel = client.channels.cache.get(748223617665466448);
 
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;

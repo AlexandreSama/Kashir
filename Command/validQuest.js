@@ -9,8 +9,6 @@ module.exports.run = (client, message) => {
     // Const pour retenir le nom de la commande (on ajoute un espace a la fin pour ne pas mal découpé le message)
     const commandName = "!validquest ";
 
-    const channel = client.channels.cache.get(748223617665466448);
-
     // on retire le commandName du message et on découpe chaque String a chaque |
     let messageArray = message.content.substring(commandName.length).split(" ");
 

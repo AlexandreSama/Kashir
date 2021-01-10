@@ -8,7 +8,6 @@ module.exports.run = (client, message) => {
     // iduser contient l'ID discord de l'utilisateur qui a envoyé le message
     let iduser = message.author.id;
 
-    const channel = client.channels.cache.get(748223617665466448);
 
     let config = '../config.json'
 
