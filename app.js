@@ -8,6 +8,8 @@ const canvas = require("discord-canvas"),
   goodbyeCanvas = new canvas.Goodbye(),
   welcomeCanvas = new canvas.Welcome();
 
+var CloudmersiveSpeechApiClient = require('cloudmersive-speech-api-client');
+
 const infos = [];
 fs.readdir('./Command/', (error, f) => {
   if (error) {
@@ -70,6 +72,7 @@ client.on('message', async (message) => {
   xp(message);
 });
 
+var apiInstance = new CloudmersiveSpeechApiClient.RecognizeApi();
 client.on('guildMemberAdd', async member => {
 
   let channelName = 'allées-et-venus';
