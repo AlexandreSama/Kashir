@@ -129,8 +129,20 @@ client.on('guildMemberRemove', async member => {
     category.send(attachment)
 })
 
-client.on('guildCreate', (message) => {
-  message.channel.send("Salutation, je suis Kashir ! C'est moi qui serait en charge de vous aider dans toutes vos taches ! Mais pour le moment, il faudra que vous fassiez cet commande pour me configurer en suivant bien les espaces et les informations demandés : !config 'ip' 'nom d'utilisateur' 'mot de passe' 'nom de la base de données' 'nom de la catégorie réservé aux fiches' 'nom de la catégorie réservé au staff' (pas besoin de mettre les infos entre '')")
+client.on('guildCreate', (guild) => {
+  let channelID;
+    let channels = guild.channels;
+    channelLoop:
+    for (let c of channels) {
+        let channelType = c[1].type;
+        if (channelType === "text") {
+            channelID = c[0];
+            break channelLoop;
+        }
+    }
+
+    let channel = client.channels.get(guild.systemChannelID || channelID);
+    channel.send(`Your message here!`);
 })
 
-client.login('NzM1MjQzMDk0MjQ0NzIwNjQw.XxdafQ.oqkc6R2R1oC_EpIJk9-ouDdpe_g');
+client.login('');

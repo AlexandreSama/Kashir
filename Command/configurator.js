@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const mysql = require('mysql');
 
-module.exports.run = (client, message) => {
+module.exports.run = (client, message, guild) => {
 
     message.delete();
 
@@ -13,11 +13,13 @@ module.exports.run = (client, message) => {
     // on retire le commandName du message et on découpe chaque String a chaque |
     let messageArray = message.content.substring(commandName.length).split(" ");
 
+    let guildName = guild.name;
+
     // On crée un array vide
     let infos = [];
 
     //On push dans le tableau les infos que l'on veut
-    infos.push({ip: messageArray[0], user: messageArray[1], password: messageArray[2], database: messageArray[3], ficheCategoryName: messageArray[4], staffCategoryName: messageArray[5] })
+    infos.push({ip: messageArray[0], user: messageArray[1], password: messageArray[2], database: guildName, ficheCategoryName: messageArray[3], staffCategoryName: messageArray[4] })
 
     // Variable de connexion a la BDD
     if (infos[0]['staffCategoryName'] != undefined) {
