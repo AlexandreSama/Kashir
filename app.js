@@ -9,6 +9,7 @@ const canvas = require("discord-canvas"),
   welcomeCanvas = new canvas.Welcome();
 
 
+  //Base du Command Handler
 fs.readdir('./Command/', (error, f) => {
   if (error) {
     return console.error(error);
@@ -38,6 +39,7 @@ fs.readdir('./Events/', (error, f) => {
   });
 });
 
+//Fonction servant pour l'XP
 function xp(message) {
   const randomNumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomNumber);
@@ -52,6 +54,7 @@ function xp(message) {
   }
 }
 
+// Contient le Command Handler et la fonction XP
 client.on('message', async (message) => {
 
   const messageArray = message.content.split(/\s+/g);
@@ -69,6 +72,7 @@ client.on('message', async (message) => {
   xp(message);
 });
 
+// Envoi un message de bienvenu dans un channel spécifique 
 client.on('guildMemberAdd', async member => {
 
   let channelName = 'allées-et-venus';
@@ -102,6 +106,7 @@ client.on('guildMemberAdd', async member => {
   channel.send(attachment);
 });
 
+// Envoi un message d'adieu dans un channel spécifique 
 client.on('guildMemberRemove', async member => {
 
     let myChannel = 'allées-et-venus'
@@ -129,20 +134,11 @@ client.on('guildMemberRemove', async member => {
     category.send(attachment)
 })
 
+//Envoi un message a chaque fois que le bot rejoins un serveur
 client.on('guildCreate', (guild) => {
-  let channelID;
-    let channels = guild.channels;
-    channelLoop:
-    for (let c of channels) {
-        let channelType = c[1].type;
-        if (channelType === "text") {
-            channelID = c[0];
-            break channelLoop;
-        }
-    }
-
-    let channel = client.channels.get(guild.systemChannelID || channelID);
-    channel.send(`Your message here!`);
+  let owner = guild.owner;
+  const user = client.users.cache.get(owner["id"]);
+  user.send("Salutation, je suis Kashir ! C'est moi qui serait en charge de vous aider dans toutes vos taches ! Mais pour le moment, il faudra que vous fassiez cet commande pour me configurer en suivant bien les espaces et les informations demandés : !config 'ip' 'nom d'utilisateur' 'mot de passe' 'nom de la base de données' 'nom de la catégorie réservé aux fiches' 'nom de la catégorie réservé au staff' (pas besoin de mettre les infos entre '')");
 })
 
 client.login('');
